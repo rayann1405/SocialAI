@@ -1,33 +1,42 @@
 import { cn } from "@/lib/utils";
 
 /**
- * SocialAI brand mark — a geometric "broadcast spark":
- * a rose node radiating a cobalt pulse. Solid, block-based, no AI gradient.
+ * SocialAI brand mark — broadcast signal:
+ * a coral node with three ink arcs (publish / reach).
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 32 32"
-      className={cn("h-8 w-8", className)}
+      className={cn("h-8 w-8 logo-mark", className)}
       role="img"
       aria-label="SocialAI"
     >
-      <rect width="32" height="32" rx="9" fill="hsl(var(--primary))" />
-      <circle cx="12" cy="20" r="3.4" fill="white" />
+      <rect width="32" height="32" rx="9" fill="hsl(var(--accent))" />
+      <circle cx="11" cy="21" r="3.2" fill="hsl(var(--primary))" />
       <path
-        d="M12 20a11 11 0 0 1 11-11"
-        stroke="white"
-        strokeWidth="2.6"
+        d="M11 21c0-4.2 3.4-7.6 7.6-7.6"
+        stroke="hsl(var(--primary))"
+        strokeWidth="2.4"
         strokeLinecap="round"
         fill="none"
         opacity="0.95"
       />
       <path
-        d="M12 20a7 7 0 0 1 7-7"
-        stroke="hsl(var(--accent))"
-        strokeWidth="2.6"
+        d="M11 21c0-6.6 5.4-12 12-12"
+        stroke="white"
+        strokeWidth="2.4"
         strokeLinecap="round"
         fill="none"
+        opacity="0.9"
+      />
+      <path
+        d="M11 21c0-8.8 7.2-16 16-16"
+        stroke="white"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.45"
       />
     </svg>
   );
@@ -36,16 +45,25 @@ export function LogoMark({ className }: { className?: string }) {
 export function Logo({
   className,
   showWordmark = true,
+  inverted = false,
 }: {
   className?: string;
   showWordmark?: boolean;
+  /** White wordmark for dark / photo backgrounds */
+  inverted?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark />
       {showWordmark && (
-        <span className="font-heading text-lg font-bold tracking-tight">
-          Social<span className="text-primary">AI</span>
+        <span
+          className={cn(
+            "font-heading text-lg font-extrabold tracking-tight",
+            inverted && "text-white",
+          )}
+        >
+          Social
+          <span className={inverted ? "text-primary" : "text-primary"}>AI</span>
         </span>
       )}
     </span>

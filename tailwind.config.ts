@@ -88,11 +88,26 @@ const config: Config = {
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
+        "logo-pulse": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.04)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        "hero-kenburns": {
+          from: { transform: "scale(1)" },
+          to: { transform: "scale(1.06)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.25s ease-out both",
         "scale-in": "scale-in 0.18s ease-out both",
         shimmer: "shimmer 1.6s infinite",
+        "logo-pulse": "logo-pulse 3.2s ease-in-out infinite",
+        float: "float 5s ease-in-out infinite",
+        "hero-kenburns": "hero-kenburns 18s ease-out forwards",
       },
     },
   },

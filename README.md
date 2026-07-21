@@ -156,17 +156,18 @@ Statuts d'un post : `DRAFT` → `SCHEDULED` → `PUBLISHING` → `PUBLISHED` / `
 
 ## Design system
 
-Identité **Ink & Tangerine** : canevas *warm stone* (papier chaud), couleur de
-marque **tangerine** `#C2410C` et accent signal **teal** `#0F766E` — une
-direction éditoriale chaleureuse, à l'écart des dégradés violet/rose génériques.
-Typographie géométrique **Outfit** (titres) + **Inter** (corps). Support complet
-clair/sombre via tokens CSS sémantiques (paires vérifiées WCAG AA), rythme
-d'espacement 8px, rayons de 0.7rem, micro-interactions 150–300ms (retour tactile
-au press, barre d'onglet active).
+Identité **Slate & Coral** : canevas slate clair, marque **coral** `#E85D0C`
+et accent **ink slate** `#0F172A` — direction créateur premium, sans dégradé
+violet/rose générique. Typographie **Plus Jakarta Sans** (titres) + **Inter**
+(corps). Support clair/sombre via tokens CSS (WCAG AA), rythme 8px, rayons
+0.85rem.
+
+**Visuels** : images générées dans `public/brand/` (hero full-bleed, calendrier,
+atmosphère auth). **Motion** : kenburns sur le hero, pulse du logo, scroll-reveal
+staggeré (`components/reveal.tsx`) — respect de `prefers-reduced-motion`.
 
 > Le design est entièrement piloté par des variables CSS
-> (`app/globals.css`) : changer d'identité = éditer les tokens, sans toucher aux
-> composants.
+> (`app/globals.css`) : changer d'identité = éditer les tokens.
 
 ---
 
