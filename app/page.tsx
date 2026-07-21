@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import {
   ArrowRight,
@@ -16,6 +17,7 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { HomeHero } from "@/components/home-hero";
+import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
 
@@ -79,12 +81,16 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <header className="flex h-16 items-center justify-between px-6 sm:px-10 lg:px-16 xl:px-24">
-        <Logo />
+      <header className="absolute inset-x-0 top-0 z-30 flex h-16 items-center justify-between px-6 sm:px-10 lg:px-16">
+        <Logo inverted />
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          <ThemeToggle className="text-white hover:bg-white/10 hover:text-white" />
           <Link href="/login">
-            <Button variant="ghost" size="sm">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/10 hover:text-white"
+            >
               Connexion
             </Button>
           </Link>
@@ -94,23 +100,22 @@ export default async function HomePage() {
         </div>
       </header>
 
-      {/* Hero */}
       <HomeHero />
 
       {/* How it works */}
       <section className="px-6 py-20 sm:px-10 lg:px-16 xl:px-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-primary">
             Comment ça marche
           </span>
           <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">
             Trois étapes pour reprendre le contrôle de tes réseaux.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
-          {STEPS.map(({ number, icon: Icon, title, text }) => (
-            <div key={number} className="relative">
+          {STEPS.map(({ number, icon: Icon, title, text }, i) => (
+            <Reveal key={number} delay={i * 90}>
               <span className="font-heading text-5xl font-extrabold text-muted-foreground/20">
                 {number}
               </span>
@@ -119,34 +124,62 @@ export default async function HomePage() {
               </span>
               <h3 className="mt-4 font-heading text-lg font-semibold">{title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-            </div>
+            </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Visual feature band */}
+      <section className="relative overflow-hidden">
+        <div className="relative mx-6 overflow-hidden rounded-2xl sm:mx-10 lg:mx-16 xl:mx-24">
+          <div className="relative aspect-[16/9] min-h-[280px] w-full">
+            <Image
+              src="/brand/feature-calendar.jpg"
+              alt="Espace de travail avec calendrier de publications"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/45 to-transparent" />
+            <Reveal className="absolute inset-0 flex items-end p-8 sm:p-12">
+              <div className="max-w-md text-white">
+                <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
+                  Un calendrier clair pour toute ta semaine créative.
+                </h2>
+                <p className="mt-3 text-sm text-white/80 sm:text-base">
+                  Visualise ce qui est programmé, ajuste en un clic, et reste
+                  régulier sans y penser chaque jour.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Features */}
       <section className="px-6 py-20 sm:px-10 lg:px-16 xl:px-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wide text-primary">
             Fonctionnalités
           </span>
           <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">
             Tout ce qu’il faut, rien de superflu.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {FEATURES.map(({ icon: Icon, title, text }) => (
-            <div
+          {FEATURES.map(({ icon: Icon, title, text }, i) => (
+            <Reveal
               key={title}
-              className="rounded-lg border border-border bg-card p-6 shadow-soft"
+              delay={i * 80}
+              className="rounded-lg border border-border bg-card p-6 shadow-soft transition-shadow duration-300 hover:shadow-card"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-heading text-lg font-semibold">{title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -154,7 +187,7 @@ export default async function HomePage() {
       {/* Mission */}
       <section className="px-6 py-20 sm:px-10 lg:px-16 xl:px-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <Reveal>
             <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-primary">
               <Target className="h-4 w-4" />
               Notre mission
@@ -169,17 +202,18 @@ export default async function HomePage() {
               créateurs indépendants passent moins de temps sur l’administratif
               et plus de temps à créer.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            {MISSION_POINTS.map(({ title, text }) => (
-              <div
+            {MISSION_POINTS.map(({ title, text }, i) => (
+              <Reveal
                 key={title}
+                delay={i * 70}
                 className="rounded-lg border border-border bg-card p-5 shadow-soft"
               >
                 <h3 className="font-heading text-base font-semibold">{title}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -187,24 +221,21 @@ export default async function HomePage() {
 
       {/* Final CTA */}
       <section className="px-6 pb-20 sm:px-10 lg:px-16 xl:px-24">
-        <div className="flex flex-col items-center gap-6 rounded-2xl bg-primary px-6 py-14 text-center text-primary-foreground sm:py-16">
+        <Reveal className="flex flex-col items-center gap-6 rounded-2xl bg-accent px-6 py-14 text-center text-accent-foreground sm:py-16">
           <h2 className="max-w-xl font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">
             Prêt à simplifier ta gestion des réseaux sociaux ?
           </h2>
-          <p className="max-w-md text-primary-foreground/85">
+          <p className="max-w-md text-accent-foreground/80">
             Crée ton compte gratuitement et programme ta première publication
             en quelques minutes.
           </p>
           <Link href="/register">
-            <Button
-              size="lg"
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-            >
+            <Button size="lg">
               Commencer gratuitement
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       <footer className="border-t border-border">
